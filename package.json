@@ -4,7 +4,9 @@
   "description": "Teamwork is an internal social network for employees of an organization",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server",
+    "test": "mocha",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -21,5 +23,16 @@
   "bugs": {
     "url": "https://github.com/barakaVictor/teamwork/issues"
   },
-  "homepage": "https://github.com/barakaVictor/teamwork#readme"
+  "homepage": "https://github.com/barakaVictor/teamwork#readme",
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "mocha": "^6.2.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "pg-promise": "^9.3.5"
+  }
 }
