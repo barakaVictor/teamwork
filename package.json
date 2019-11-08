@@ -1,0 +1,25 @@
+{
+  "name": "teamwork",
+  "version": "1.0.0",
+  "description": "Teamwork is an internal social network for employees of an organization",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barakaVictor/teamwork.git"
+  },
+  "keywords": [
+    "teamwork",
+    "employees",
+    "social",
+    "network"
+  ],
+  "author": "Victor Baraka Oyuga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/barakaVictor/teamwork/issues"
+  },
+  "homepage": "https://github.com/barakaVictor/teamwork#readme"
+}
