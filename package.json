@@ -4,7 +4,8 @@
   "description": "Teamwork is an internal social network for employees of an organization",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server",
+    "start": "node server",
+    "dev": "nodemon server",
     "test": "mocha",
     "lint": "eslint ."
   },
