@@ -5,7 +5,7 @@ class UserController {
   }
 
   async createUser(request, response, next) {
-    return this.model.createUser(request.body)
+    return this.model.save(request.body)
       .then((userId) => response
         .status(201)
         .json({
