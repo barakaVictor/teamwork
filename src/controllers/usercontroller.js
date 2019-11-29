@@ -17,6 +17,19 @@ class UserController {
           },
         })).catch((error) => next(error));
   }
+
+  async signin(request, response, next) {
+    return this.model.signin(request.body)
+      .then((data) => response
+        .status(200)
+        .json({
+          status: 'success',
+          data: {
+            token: data.token,
+            userId: data.userId,
+          },
+        })).catch((error) => next(error));
+  }
 }
 
 module.exports = UserController;

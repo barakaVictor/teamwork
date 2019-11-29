@@ -16,5 +16,6 @@ router.get('/', (request, response) => {
 });
 
 router.post('/create-user', userValidator, validate, userController.createUser);
+router.post('/signin', userController.signin);
 
 module.exports = router;
