@@ -2,6 +2,7 @@ class UserController {
   constructor(UserModel) {
     this.model = new UserModel();
     this.createUser = this.createUser.bind(this);
+    this.signin = this.signin.bind(this);
   }
 
   async createUser(request, response, next) {
