@@ -8,7 +8,7 @@ describe('UserController.createUser', () => {
   it('Returns 201 success response code on successful user creation', (done) => {
     function UserModel() {
       return {
-        async createUser() {
+        async save() {
           return Promise.resolve(true);
         },
       };
