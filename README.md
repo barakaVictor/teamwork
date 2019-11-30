@@ -1,4 +1,7 @@
 # teamwork
+
+[![Build Status](https://travis-ci.org/barakaVictor/teamwork.svg?branch=develop)](https://travis-ci.org/barakaVictor/teamwork)
+
  An internal social network for employees of an organization.
 
 ### Installing
