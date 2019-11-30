@@ -14,6 +14,6 @@ app.use(cors);
 app.use(bodyParser.json());
 
 app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/gifs', gifRoutes);
+app.use('/api/v1/gifs/', gifRoutes);
 
 module.exports = app;

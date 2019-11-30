@@ -1,6 +1,8 @@
 const router = require('express').Router();
 
-router.post('/', (request, response, next) => {
+const multer = require('../../../../config/multer-config');
+
+router.post('/', multer, (request, response, next) => {
   response.status(200).json({
     status: 'success',
     data: {
