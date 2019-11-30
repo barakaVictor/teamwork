@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server",
-    "test:unit": "mocha test/unit/*.js",
+    "test:unit": "nyc mocha test/unit/*.js",
     "lint": "eslint ."
   },
   "repository": {
@@ -29,6 +29,7 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "mocha": "^6.2.2",
+    "nyc": "^14.1.1",
     "sinon": "^7.5.0"
   },
   "dependencies": {
