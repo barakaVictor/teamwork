@@ -9,10 +9,16 @@ const mockResponse = () => {
   return response;
 };
 
-const mockNext = sinon.stub();
+const mockNext = (data) => {
+  throw new Error(data);
+};
+
+const dummyDb = {};
+
 
 module.exports = {
   mockRequest,
   mockResponse,
   mockNext,
+  dummyDb,
 };
