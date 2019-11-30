@@ -33,9 +33,9 @@ class UserModel extends BaseModel {
 
   async find(query) {
     return this.db.oneOrNone(
-      'SELECT $(columns:name) FROM $(table:name) WHERE $(query:name) = $(query:list)',
+      'SELECT * FROM $(table:name) WHERE email = $(query:list)',
       {
-        columns: ['firstname', 'lastname', 'email', 'department'],
+        // columns: ['id', 'firstname', 'lastname', 'email', 'password', 'department'],
         table: this.table,
         query,
       },
