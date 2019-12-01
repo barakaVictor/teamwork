@@ -1,3 +1,4 @@
+const fs = require('fs');
 const cloudinaryUploadHandler = require('../config/cloudinary-config');
 const localUploadHandler = require('../config/multer-config');
 
@@ -19,10 +20,29 @@ class UploadController {
         if (error) {
           next(error);
         }
-        return response.status(200).json({
-          status: 'success',
-          data: { ...result },
-        });
+
+        const image = {
+          title: result.original_filename,
+          public_id: result.public_id,
+          size: result.bytes,
+          imageUrl: result.secure_url,
+          createdOn: result.created_at,
+        };
+
+        this.model.save(image)
+          .then((result) => {
+            fs.unlinkSync(filePath);
+            return response.status(200).json({
+              status: 'success',
+              data: {
+                gifId: result.id,
+                message: 'GIF image successfully posted',
+                createdOn: result.createdOn,
+                title: result.title,
+                imageUrl: result.imageUrl,
+              },
+            });
+          }).catch((error) => next(error));
       });
     });
   }
