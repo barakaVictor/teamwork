@@ -18,7 +18,7 @@ class UploadController {
 
       return cloudinaryUploadHandler.uploader.upload(filePath, (error, result) => {
         if (error) {
-          next(error);
+          return next(error);
         }
 
         const image = {
