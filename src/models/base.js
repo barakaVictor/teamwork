@@ -33,12 +33,12 @@ class BaseModel {
       });
   }
 
-  async save(obj) {
+  async save(data) {
     return this.db.none(
-      'INSERT INTO $1:name($2:name) VALUES($2:list)',
-      [this.table, obj],
+      'INSERT INTO $1:name($2:name) VALUES($2:list) RETURNING *',
+      [this.table, data],
     )
-      .then(() => true)
+      .then((obj) => obj)
       .catch((error) => {
         throw new Error(error);
       });

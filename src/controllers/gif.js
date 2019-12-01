@@ -29,17 +29,17 @@ class UploadController {
           createdOn: result.created_at,
         };
 
-        this.model.save(image)
-          .then((result) => {
+        return this.model.save(image)
+          .then((data) => {
             fs.unlinkSync(filePath);
             return response.status(200).json({
               status: 'success',
               data: {
-                gifId: result.id,
+                gifId: data.id,
                 message: 'GIF image successfully posted',
-                createdOn: result.createdOn,
-                title: result.title,
-                imageUrl: result.imageUrl,
+                createdOn: result.created_at,
+                title: result.original_filename,
+                imageUrl: result.secure_url,
               },
             });
           }).catch((error) => next(error));
