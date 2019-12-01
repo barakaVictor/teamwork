@@ -1,9 +1,8 @@
-const db = require('../db');
 const BaseModel = require('./base');
 
 class UserModel extends BaseModel {
   constructor(table = 'users') {
-    super(db, table);
+    super(table);
   }
 
   /*
@@ -11,7 +10,7 @@ class UserModel extends BaseModel {
   * returns a list of user objects or none.
   */
   async all() {
-    return db.any(
+    return this.db.any(
       'SELECT $(columns:name) FROM $(table:name)',
       {
         columns: ['firstname', 'lastname', 'email', 'department'],
