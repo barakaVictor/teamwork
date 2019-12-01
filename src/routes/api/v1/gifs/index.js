@@ -1,18 +1,11 @@
 const router = require('express').Router();
 
-const multer = require('../../../../config/multer-config');
+const GifModel = require('../../../../models/gif');
 
-router.post('/', multer, (request, response, next) => {
-  response.status(200).json({
-    status: 'success',
-    data: {
-      gifId: 1,
-      message: 'GIF image successfully posted',
-      createdOn: new Date(),
-      title: 'Gif',
-      imageUrl: 'url',
-    },
-  });
-});
+const GifController = require('../../../../controllers/gif');
+
+const gifController = new GifController(GifModel);
+
+router.post('/', gifController.upload);
 
 module.exports = router;
