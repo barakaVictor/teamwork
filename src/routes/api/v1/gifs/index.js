@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const GifModel = require('../../../../models/gif');
 
-const GifController = require('../../../../controllers/gif');
+const GifController = require('../../../../controllers/gifcontroller');
 
 const gifController = new GifController(GifModel);
 

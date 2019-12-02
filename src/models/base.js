@@ -34,7 +34,7 @@ class BaseModel {
   }
 
   async save(data) {
-    return this.db.none(
+    return this.db.one(
       'INSERT INTO $1:name($2:name) VALUES($2:list) RETURNING *',
       [this.table, data],
     )
