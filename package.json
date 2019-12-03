@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon server",
     "test:unit": "nyc mocha test/unit/*.js",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "lint": "eslint ."
   },
   "repository": {
@@ -25,6 +26,7 @@
   },
   "homepage": "https://github.com/barakaVictor/teamwork#readme",
   "devDependencies": {
+    "codecov": "^3.6.1",
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
