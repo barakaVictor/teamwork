@@ -1,6 +1,7 @@
 class ArticlesController {
   constructor(Model) {
     this.model = new Model();
+    this.createArticle = this.createArticle.bind(this);
   }
 
   async createArticle(request, response, next) {
