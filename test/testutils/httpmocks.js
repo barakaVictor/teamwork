@@ -9,9 +9,7 @@ const mockResponse = () => {
   return response;
 };
 
-const mockNext = (data) => {
-  throw new Error(data);
-};
+const mockNext = () => sinon.spy();
 
 const dummyDb = {};
 

@@ -1,4 +1,4 @@
-const { authenticate, generateAuthToken, hashpassword } = require('../utils/auth');
+const authutils = require('../utils/auth');
 
 class UserController {
   constructor(UserModel) {
@@ -8,7 +8,7 @@ class UserController {
   }
 
   async createUser(request, response, next) {
-    return hashpassword(request.body.password, 10)
+    return authutils.hashpassword(request.body.password, 10)
       .then((hash) => {
         request.body.password = hash;
         return this.userModel.save(request.body)
@@ -22,7 +22,9 @@ class UserController {
                 userId,
               },
             }))
-          .catch((error) => next(error));
+          .catch((error) => {
+            throw new Error(error);
+          });
       }).catch((error) => next(error));
   }
 
@@ -36,7 +38,7 @@ class UserController {
             error: 'User not found',
           });
         }
-        return authenticate(password, user.password)
+        return authutils.authenticate(password, user.password)
           .then((valid) => {
             if (!valid) {
               return response.status(401).json({
@@ -44,15 +46,19 @@ class UserController {
                 error: 'Invalid credentials provided',
               });
             }
-            return generateAuthToken(user)
+            return authutils.generateAuthToken(user)
               .then((token) => response.status(200).json({
                 status: 'success',
                 data: {
                   token,
                   userId: user.id,
                 },
-              })).catch((error) => next(error));
-          }).catch((error) => next(error));
+              })).catch((error) => {
+                throw new Error(error);
+              });
+          }).catch((error) => {
+            throw new Error(error);
+          });
       }).catch((error) => next(error));
   }
 }

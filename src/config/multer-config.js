@@ -1,12 +1,5 @@
 const multer = require('multer');
 
-const mimeTypes = {
-  'img/jpg': 'jpg',
-  'img/jpeg': 'jpg',
-  'img/png': 'png',
-  'img/gif': 'gif',
-};
-
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
     callback(null, 'public/gifs');
