@@ -5,9 +5,21 @@ const { mockRequest, mockResponse, mockNext } = require('../testutils/httpmocks'
 const ArticlesController = require('../../src/controllers/articlescontroller');
 
 describe('ArticlesController.createArticle', () => {
-  let articlesController;
+  let request;
   let response;
+  let next;
   beforeEach(() => {
+    request = mockRequest({
+      body: {
+        title: 'dummy title',
+        article: 'dummy article content',
+      },
+    });
+    response = mockResponse();
+    next = mockNext();
+  });
+
+  it('Returns 200 ok response on success', (done) => {
     function ArticlesModel() {
       return {
         save: (data) => {
@@ -16,21 +28,29 @@ describe('ArticlesController.createArticle', () => {
         },
       };
     }
-    response = mockResponse();
-    articlesController = new ArticlesController(ArticlesModel);
+    const articlesController = new ArticlesController(ArticlesModel);
+
+    articlesController.createArticle(request, response, next)
+      .then((resp) => {
+        assert.equal(resp.status.args[0][0], 200);
+        done();
+      })
+      .catch((error) => done(error));
   });
 
-  it('Returns 200 ok response on success', (done) => {
-    const request = mockRequest({
-      body: {
-        title: 'dummy title',
-        article: 'dummy article content',
-      },
-    });
-    articlesController.createArticle(request, response, mockNext).then((resp) => {
-      assert.equal(resp.status.args[0][0], 200);
-      done();
-    })
+  it('Calls next on model saving error', (done) => {
+    function ArticlesModel() {
+      return {
+        save: () => Promise.reject('Something aint right!!'),
+      };
+    }
+    const articlesController = new ArticlesController(ArticlesModel);
+
+    articlesController.createArticle(request, response, next)
+      .then(() => {
+        assert(next.called);
+        done();
+      })
       .catch((error) => done(error));
   });
 });

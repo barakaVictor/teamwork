@@ -27,7 +27,9 @@ class UploadController {
               title: data.title,
               imageUrl: data.imageurl,
             },
-          })).catch((error) => next(error));
+          })).catch((error) => {
+            throw new Error(error);
+          });
       }).catch((error) => next(error));
   }
 }
