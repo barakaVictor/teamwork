@@ -6,5 +6,6 @@ const ArticlesController = require('../../../../controllers/articlescontroller')
 const articlesController = new ArticlesController(ArticlesModel);
 
 router.post('/', articlesController.createArticle);
+router.post('/:articleId', articlesController.patch);
 
 module.exports = router;

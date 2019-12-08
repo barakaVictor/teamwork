@@ -2,6 +2,7 @@ class ArticlesController {
   constructor(Model) {
     this.model = new Model();
     this.createArticle = this.createArticle.bind(this);
+    this.patch = this.patch.bind(this);
   }
 
   async createArticle(request, response, next) {
@@ -27,7 +28,7 @@ class ArticlesController {
           });
         }
         const newArticle = request.body;
-        return this.model.update(newArticle)
+        return this.model.update(newArticle, { id: article.id })
           .then((savedArticle) => response.status(200).json({
             status: 'Success',
             data: {
