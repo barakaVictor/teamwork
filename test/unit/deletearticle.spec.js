@@ -58,7 +58,7 @@ describe('ArticlesController.delete', () => {
       .catch((error) => done(error));
   });
 
-  it('Calls next atleast once when an erro is encoutered', (done) => {
+  it('Calls next atleast once when an error is encoutered', (done) => {
     function DummyModel() {
       return {
         delete: () => Promise.reject(),

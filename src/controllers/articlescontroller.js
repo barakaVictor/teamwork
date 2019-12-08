@@ -52,7 +52,7 @@ class ArticlesController {
             error: 'The requested articles could not be found',
           });
         }
-        return this.model.delete(article)
+        return this.model.delete({ id: article.id })
           .then(() => response.status(200).json({
             status: 'Success',
             data: {
