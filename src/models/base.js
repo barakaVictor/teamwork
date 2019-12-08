@@ -12,7 +12,7 @@ class BaseModel {
   }
 
   async find(query) {
-    return this.db.any(
+    return this.db.one(
       'SELECT * FROM $1:name WHERE $2:name = $2:list',
       [this.table, query],
     )
