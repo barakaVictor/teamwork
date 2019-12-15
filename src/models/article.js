@@ -16,6 +16,10 @@ class ArticlesModel extends BaseModel {
         throw new Error(error);
       });
   }
+
+  async articleComments() {
+    return this.hasMany('articlecomments');
+  }
 }
 
 module.exports = ArticlesModel;
