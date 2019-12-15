@@ -6,25 +6,27 @@ class ArticleCommentsModel extends BaseModel {
   }
 
   async save(obj) {
-    return this.db.one(
-      'SELECT FROM $1:name WHERE id = $2',
-      ['articles', obj.articleid],
-    )
-      .then((article) => {
-        if (article) {
-          return this.db.any(
-            'INSERT INTO $1:name($2:name) VALUES($2:list) RETURNING *',
-            [this.table, obj],
-          )
-            .then((comment) => comment)
-            .catch((error) => {
-              throw new Error(error);
-            });
-        }
-        return null;
-      }).catch((error) => {
-        throw new Error(error);
-      });
+    return this.db.oneOrNone(
+      'SELECT * FROM articles WHERE id = $1',
+      [obj.articleid],
+    ).then((article) => {
+      if (!article) {
+        throw new Error('Related article does not exist yet');
+      }
+      return this.db.one(
+        'INSERT INTO $1:name($2:name) VALUES($2:list) RETURNING *',
+        [this.table, obj],
+      )
+        .then((comment) => ({
+          comment,
+          article,
+        }))
+        .catch((error) => {
+          throw new Error(error);
+        });
+    }).catch((error) => {
+      throw new Error(error);
+    });
   }
 }
 
