@@ -1,9 +1,7 @@
-const db = require('../db');
-
 class BaseModel {
-  constructor(table) {
+  constructor(db) {
     this.db = db;
-    this.table = table;
+    this.table = 'table';
     this.all = this.all.bind(this);
     this.find = this.find.bind(this);
     this.save = this.save.bind(this);

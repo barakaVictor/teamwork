@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 
 const bodyParser = require('body-parser');
+const container = require('./container');
 
 const cors = require('./middleware/cors');
 
@@ -11,6 +12,7 @@ const gifRoutes = require('./routes/api/v1/gifs');
 const articleRoutes = require('./routes/api/v1/articles');
 
 app.use(cors);
+app.set('container', container);
 
 app.use(bodyParser.json());
 
