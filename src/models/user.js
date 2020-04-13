@@ -1,10 +1,6 @@
 const BaseModel = require('./base');
 
-class UserModel extends BaseModel {
-  constructor(table = 'users') {
-    super(table);
-  }
-
+class User extends BaseModel {
   /*
   * Overrides the super class all() method to retrieve only specific columns from the users table.
   * returns a list of user objects or none.
@@ -64,4 +60,4 @@ class UserModel extends BaseModel {
   }
 }
 
-module.exports = UserModel;
+module.exports = User;

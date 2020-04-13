@@ -1,10 +1,10 @@
 const fs = require('fs');
 const cloudinary = require('../../config/cloudinary-config');
-const multer = require('../../config/multer-config');
+const { upload } = require('../../config/multer-config');
 
-function upload(request, response) {
+function fileUpload(request, response) {
   return new Promise((resolve, reject) => {
-    multer.upload(request, response, (error) => {
+    upload(request, response, (error) => {
       if (error) {
         reject(error);
       }
@@ -21,5 +21,5 @@ function upload(request, response) {
 }
 
 module.exports = {
-  upload,
+  fileUpload,
 };
