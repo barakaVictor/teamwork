@@ -1,10 +1,6 @@
 const BaseModel = require('./base');
 
-class GifCommentsModel extends BaseModel {
-  constructor(table = 'gifcomments') {
-    super(table);
-  }
-
+class GifComment extends BaseModel {
   async save(obj) {
     return this.db.oneOrNone(
       'SELECT * FROM gifs WHERE id = $1',
@@ -30,4 +26,4 @@ class GifCommentsModel extends BaseModel {
   }
 }
 
-module.exports = GifCommentsModel;
+module.exports = GifComment;
