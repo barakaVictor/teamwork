@@ -1,8 +1,8 @@
 const assert = require('assert');
 
-const { mockRequest, mockResponse, mockNext } = require('../testutils/httpmocks');
+const { mockRequest, mockResponse, mockNext } = require('../../testutils/httpmocks');
 
-const GifController = require('../../src/controllers/gifcontroller');
+const GifController = require('../../../src/controllers/gifcontroller');
 
 describe('GifController.delete', () => {
   let request;

@@ -2,11 +2,11 @@ const assert = require('assert');
 
 const sinon = require('sinon');
 
-const { mockRequest, mockResponse, mockNext } = require('../testutils/httpmocks');
+const { mockRequest, mockResponse, mockNext } = require('../../testutils/httpmocks');
 
-const authUtils = require('../../src/utils/auth');
+const authUtils = require('../../../src/utils/auth');
 
-const UserController = require('../../src/controllers/usercontroller');
+const UserController = require('../../../src/controllers/usercontroller');
 
 describe('UserController.signin', () => {
   let userController;

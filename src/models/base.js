@@ -13,12 +13,36 @@ class BaseModel {
     }
   }
 
+  isEmpty(data){
+    if(typeof(data) == 'number' || typeof(data) == 'boolean'){ 
+      return false; 
+    }
+    if(typeof(data) == 'undefined' || data === null){
+      return true; 
+    }
+    if(typeof(data.length) != 'undefined'){
+      return data.length == 0;
+    }
+    var count = 0;
+    for(var i in data){
+      if(data.hasOwnProperty(i)){
+        count ++;
+      }
+    }
+    return count == 0;
+  }
+
   async find(query) {
-    return this.db.one(
+    return this.db.manyOrNone(
       'SELECT * FROM $1:name WHERE $2:name = $2:list',
       [this.table, query],
     )
-      .then((obj) => obj)
+      .then((obj) => {
+        if(this.isEmpty(obj)){
+          return null
+        }
+        return obj
+      })
       .catch((error) => {
         throw new Error(error);
       });

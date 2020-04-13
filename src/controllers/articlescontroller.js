@@ -1,12 +1,28 @@
 class ArticlesController {
   constructor(Model) {
     this.model = new Model();
-    this.createArticle = this.createArticle.bind(this);
-    this.patch = this.patch.bind(this);
+    this.create = this.create.bind(this);
+    this.update = this.update.bind(this);
     this.delete = this.delete.bind(this);
+    this.read = this.read.bind(this)
   }
 
-  async createArticle(request, response, next) {
+  async read(request, response, next){
+    return this.model.find({ id: request.params.articleId })
+    .then((obj) => {
+      if(!obj){
+        return response.status(404).json({
+          message: "Resource not found"
+        })
+      }
+      return response.status(200).json({
+        status: "success",
+        data: obj
+      })
+    }).catch((error)=>next(error))
+  }
+
+  async create(request, response, next) {
     return this.model.save(request.body)
       .then((article) => response.status(200).json({
         status: 'success',
@@ -19,7 +35,7 @@ class ArticlesController {
       })).catch((error) => next(error));
   }
 
-  async patch(request, response, next) {
+  async update(request, response, next) {
     return this.model.find({ id: request.params.articleId })
       .then((article) => {
         if (!article) {

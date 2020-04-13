@@ -1,8 +1,8 @@
 const assert = require('assert');
 
-const { mockRequest, mockResponse, mockNext } = require('../testutils/httpmocks');
+const { mockRequest, mockResponse, mockNext } = require('../../testutils/httpmocks');
 
-const ArticlesController = require('../../src/controllers/articlescontroller');
+const ArticlesController = require('../../../src/controllers/articlescontroller');
 
 describe('ArticlesController.delete', () => {
   let articlesController;

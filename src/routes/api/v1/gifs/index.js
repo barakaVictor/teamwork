@@ -10,7 +10,7 @@ const CommentsController = require('../../../../controllers/commentscontroller')
 const gifController = new GifController(GifModel);
 const commentsController = new CommentsController(GifCommentsModel);
 
-
+router.get('/:gifId', gifController.get)
 router.post('/', gifController.upload);
 router.delete('/:gifId', gifController.delete);
 router.post('/:gifId/comments', commentsController.commentOnGif);
