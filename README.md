@@ -1,7 +1,7 @@
 # teamwork
 
 [![Build Status](https://travis-ci.org/barakaVictor/teamwork.svg?branch=master)](https://travis-ci.org/barakaVictor/teamwork)
-[![codecov](https://codecov.io/gh/barakaVictor/teamwork/branch/develop/graph/badge.svg)](https://codecov.io/gh/barakaVictor/teamwork)
+[![codecov](https://codecov.io/gh/barakaVictor/teamwork/branch/master/graph/badge.svg)](https://codecov.io/gh/barakaVictor/teamwork)
 
  An internal social network for employees of an organization.
 
