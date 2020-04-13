@@ -9,7 +9,7 @@ const CommentsController = require('../../../../controllers/commentscontroller')
 const articlesController = new ArticlesController(ArticlesModel);
 const commentsController = new CommentsController(ArticleCommentsModel);
 
-
+router.get('/:articleId', articlesController.get);
 router.post('/', articlesController.createArticle);
 router.patch('/:articleId', articlesController.patch);
 router.delete('/:articleId', articlesController.delete);

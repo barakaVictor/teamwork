@@ -2,11 +2,11 @@ const assert = require('assert');
 
 const sinon = require('sinon');
 
-const { mockRequest, mockResponse, mockNext } = require('../testutils/httpmocks');
+const { mockRequest, mockResponse, mockNext } = require('../../testutils/httpmocks');
 
-const uploader = require('../../src/utils/uploader');
+const uploader = require('../../../src/utils/uploader');
 
-const GifController = require('../../src/controllers/gifcontroller');
+const GifController = require('../../../src/controllers/gifcontroller');
 
 describe('GifController.upload', () => {
   let gifModel;

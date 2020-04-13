@@ -1,8 +1,8 @@
 const assert = require('assert');
 
-const { mockRequest, mockResponse, mockNext } = require('../testutils/httpmocks');
+const { mockRequest, mockResponse, mockNext } = require('../../testutils/httpmocks');
 
-const UserController = require('../../src/controllers/usercontroller');
+const UserController = require('../../../src/controllers/usercontroller');
 
 describe('UserController.createUser', () => {
   let request;

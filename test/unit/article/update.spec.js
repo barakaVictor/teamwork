@@ -1,10 +1,10 @@
 const assert = require('assert');
 
-const { mockRequest, mockResponse, mockNext } = require('../testutils/httpmocks');
+const { mockRequest, mockResponse, mockNext } = require('../../testutils/httpmocks');
 
-const ArticlesController = require('../../src/controllers/articlescontroller');
+const ArticlesController = require('../../../src/controllers/articlescontroller');
 
-describe('ArticlesController.patch', () => {
+describe('ArticlesController.update', () => {
   let request;
   let response;
   let next;
@@ -32,7 +32,7 @@ describe('ArticlesController.patch', () => {
       };
     };
     articlesController = new ArticlesController(articlesModel);
-    articlesController.patch(request, response, next)
+    articlesController.update(request, response, next)
       .then((resp) => {
         assert.equal(resp.status.args[0][0], 200);
         done();
@@ -48,7 +48,7 @@ describe('ArticlesController.patch', () => {
     };
 
     articlesController = new ArticlesController(articlesModel);
-    articlesController.patch(request, response, next)
+    articlesController.update(request, response, next)
       .then((resp) => {
         assert.equal(resp.status.args[0][0], 404);
         done();
@@ -67,7 +67,7 @@ describe('ArticlesController.patch', () => {
       };
     };
     articlesController = new ArticlesController(articlesModel);
-    articlesController.patch(request, response, next)
+    articlesController.update(request, response, next)
       .then(() => {
         assert(next.called);
         done();
