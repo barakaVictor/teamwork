@@ -1,4 +1,4 @@
-const uploader = require('../utils/uploader');
+const { fileUpload } = require('../utils/uploader');
 
 class UploadController {
   constructor(Model) {
@@ -8,7 +8,7 @@ class UploadController {
   }
 
   async upload(request, response, next) {
-    return uploader.upload(request, response)
+    return fileUpload(request, response)
       .then((result) => {
         const image = {
           title: result.original_filename,

@@ -1,9 +1,7 @@
 const BaseModel = require('./base');
 
-class ArticleCommentsModel extends BaseModel {
-  constructor(table = 'articlecomments') {
-    super(table);
-  }
+class ArticleComment extends BaseModel {
+  
 
   async save(obj) {
     return this.db.oneOrNone(
@@ -30,4 +28,4 @@ class ArticleCommentsModel extends BaseModel {
   }
 }
 
-module.exports = ArticleCommentsModel;
+module.exports = ArticleComment;

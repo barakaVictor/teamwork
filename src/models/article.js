@@ -1,10 +1,6 @@
 const BaseModel = require('./base');
 
-class ArticlesModel extends BaseModel {
-  constructor(table = 'articles') {
-    super(table);
-  }
-
+class Article extends BaseModel {
   async update(newObj, selector) {
     const { title, article } = newObj;
     return this.db.one(
@@ -22,4 +18,4 @@ class ArticlesModel extends BaseModel {
   }
 }
 
-module.exports = ArticlesModel;
+module.exports = Article;

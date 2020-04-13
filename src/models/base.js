@@ -1,12 +1,17 @@
+const db = require("../db/index")
 class BaseModel {
-  constructor(db) {
+  table = ""
+  constructor(table) {
     this.db = db;
-    this.table = 'table';
     this.all = this.all.bind(this);
     this.find = this.find.bind(this);
     this.save = this.save.bind(this);
     this.delete = this.delete.bind(this);
     this.truncate = this.truncate.bind(this);
+    this.join = this.join.bind(this);
+    this.table = ()=>{
+      return (table ? `${table.toLowerCase()}s` : `${this.constructor.name.toLowerCase()}s`)
+    }
   }
 
   async find(query) {
@@ -62,6 +67,10 @@ class BaseModel {
       .catch((error) => {
         throw new Error(error);
       });
+  }
+
+  async join(tablename) {
+    re
   }
 }
 
