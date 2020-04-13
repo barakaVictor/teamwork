@@ -1,9 +1,7 @@
 const BaseModel = require('./base');
 
-class GifModel extends BaseModel {
-  constructor(table = 'gifs') {
-    super(table);
-  }
+class Gif extends BaseModel {
+  
 }
 
-module.exports = GifModel;
+module.exports = Gif;
