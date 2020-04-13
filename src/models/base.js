@@ -1,6 +1,5 @@
-const db = require("../db/index")
+const {db} = require("../db")
 class BaseModel {
-  table = ""
   constructor(table) {
     this.db = db;
     this.all = this.all.bind(this);

@@ -1,8 +1,6 @@
 const BaseModel = require('./base');
 
 class ArticleComment extends BaseModel {
-  
-
   async save(obj) {
     return this.db.oneOrNone(
       'SELECT * FROM articles WHERE id = $1',

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {upload} = require('../../../../config/multer-config')
+const { upload } = require('../../../../config/multer-config');
 
 const GifCommentsModel = require('../../../../models/gifcomments');
 const GifModel = require('../../../../models/gif');
