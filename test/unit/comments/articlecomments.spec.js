@@ -1,8 +1,8 @@
 const assert = require('assert');
 
-const { mockRequest, mockResponse, mockNext } = require('../testutils/httpmocks');
+const { mockRequest, mockResponse, mockNext } = require('../../testutils/httpmocks');
 
-const CommentsController = require('../../src/controllers/commentscontroller');
+const CommentsController = require('../../../src/controllers/commentscontroller');
 
 describe('CommentsController.commentOnArticle', () => {
   let request;

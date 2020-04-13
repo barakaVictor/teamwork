@@ -1,8 +1,8 @@
 const assert = require('assert');
 
-const { mockRequest, mockResponse, mockNext } = require('../testutils/httpmocks');
+const { mockRequest, mockResponse, mockNext } = require('../../testutils/httpmocks');
 
-const FeedController = require('../../src/controllers/feedscontroller');
+const FeedController = require('../../../src/controllers/feedscontroller');
 
 const dummydata = [
   {

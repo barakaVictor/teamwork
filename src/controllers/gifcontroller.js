@@ -5,6 +5,22 @@ class UploadController {
     this.model = new Model();
     this.upload = this.upload.bind(this);
     this.delete = this.delete.bind(this);
+    this.read = this.read.bind(this)
+  }
+
+  async read(request, response, next){
+    return this.model.find({ id: request.params.gifId })
+    .then((obj) => {
+      if(obj){
+        return response.status(200).json({
+          status: "success",
+          data: obj
+        })
+      }
+      return response.status(404).json({
+        message: "Resource not found"
+      })
+    }).catch((error)=>next(error))
   }
 
   async upload(request, response, next) {

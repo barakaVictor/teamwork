@@ -2,13 +2,13 @@ const assert = require('assert');
 
 const sinon = require('sinon');
 
-const { mockRequest, mockResponse } = require('../testutils/httpmocks');
+const { mockRequest, mockResponse } = require('../../testutils/httpmocks');
 
-const cloudinary = require('../../src/config/cloudinary-config');
-const multer = require('../../src/config/multer-config');
+const cloudinary = require('../../../src/config/cloudinary-config');
+const multer = require('../../../src/config/multer-config');
 
 const fs = require('fs')
-const uploader = require('../../src/utils/uploader');
+const uploader = require('../../../src/utils/uploader');
 
 describe('Upload Utility', () => {
   let request;

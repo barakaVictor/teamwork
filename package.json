@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server",
-    "test:unit": "nyc mocha test/unit/*.js",
+    "test:unit": "nyc mocha --recursive test/unit/",
     "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "lint": "eslint ."
   },
