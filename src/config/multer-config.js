@@ -1,8 +1,12 @@
 const multer = require('multer');
+const fs = require('fs')
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, 'public/gifs');
+    const uploadLocation = 'public/gifs';
+    fs.mkdir(uploadLocation, {recursive: true}, (err)=>{
+      callback(err, 'public/gifs')
+    })
   },
   filename: (req, file, callback) => {
     const name = file.originalname;
