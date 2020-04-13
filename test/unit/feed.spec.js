@@ -49,4 +49,19 @@ describe('feed', () => {
         done();
       }).catch((error) => done(error));
   });
+  it('Calls next on feeds fetch error', (done) => {
+    function FeedModel() {
+      return {
+        join: () => Promise.reject('Something aint right!!'),
+      };
+    }
+    const feedsController = new FeedController(FeedModel);
+
+    feedsController.fetchFeed(request, response, next)
+      .then(() => {
+        assert(next.called);
+        done();
+      })
+      .catch((error) => done(error));
+  });
 });

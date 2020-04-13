@@ -4,12 +4,12 @@ const multer = require('../../config/multer-config');
 
 function upload(request, response) {
   return new Promise((resolve, reject) => {
-    multer.upload(request, response, (error) => {
+    multer.fileSystemUpload(request, response, (error) => {
       if (error) {
         reject(error);
       }
       const filePath = request.file.path;
-      cloudinary.upload(filePath, (cloudinaryerror, result) => {
+      cloudinary.cloudinaryUpload(filePath, (cloudinaryerror, result) => {
         if (cloudinaryerror) {
           reject(cloudinaryerror);
         }
