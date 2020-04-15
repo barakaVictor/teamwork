@@ -1,4 +1,4 @@
-const BaseModel = require('./base');
+const BaseModel = require('../app/models/base');
 
 class Feed extends BaseModel {
   async join(tb_one, tb_two) {

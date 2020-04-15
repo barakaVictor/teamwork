@@ -25,13 +25,13 @@ describe('ArticlesController.update', () => {
     next = mockNext();
   });
   it('Returns 200 Ok message on successful article edit function', (done) => {
-    articlesModel = function ArticleModel() {
+    function ArticleModel() {
       return {
         update: (article) => Promise.resolve(article),
         find: () => Promise.resolve({}),
       };
     };
-    articlesController = new ArticlesController(articlesModel);
+    articlesController = new ArticlesController(new ArticleModel());
     articlesController.update(request, response, next)
       .then((resp) => {
         assert.equal(resp.status.args[0][0], 200);
@@ -41,13 +41,13 @@ describe('ArticlesController.update', () => {
   });
 
   it('Returns 404 error code if article to be edited is non-existent', (done) => {
-    articlesModel = function ArticleModel() {
+    function ArticleModel() {
       return {
         find: () => Promise.resolve(null),
       };
     };
 
-    articlesController = new ArticlesController(articlesModel);
+    articlesController = new ArticlesController(new ArticleModel());
     articlesController.update(request, response, next)
       .then((resp) => {
         assert.equal(resp.status.args[0][0], 404);
@@ -57,7 +57,7 @@ describe('ArticlesController.update', () => {
   });
 
   it('Calls next when an error is encountered', (done) => {
-    articlesModel = function ArticleModel() {
+    function ArticleModel() {
       return {
         find: () => Promise.resolve({
           title: 'test',
@@ -66,7 +66,7 @@ describe('ArticlesController.update', () => {
         update: () => Promise.reject(),
       };
     };
-    articlesController = new ArticlesController(articlesModel);
+    articlesController = new ArticlesController(new ArticleModel());
     articlesController.update(request, response, next)
       .then(() => {
         assert(next.called);

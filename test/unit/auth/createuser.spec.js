@@ -4,6 +4,8 @@ const { mockRequest, mockResponse, mockNext } = require('../../testutils/httpmoc
 
 const UserController = require('../../../src/controllers/usercontroller');
 
+const middleware = require('../../../src/utils/auth')()
+
 describe('UserController.createUser', () => {
   let request;
   let response;
@@ -18,7 +20,7 @@ describe('UserController.createUser', () => {
         save: async (data) => Promise.resolve(data),
       };
     };
-    userController = new UserController(userModel);
+    userController = new UserController(new userModel(), middleware);
   });
 
   it('Returns 201 success response code on successful user creation', (done) => {
@@ -46,12 +48,12 @@ describe('UserController.createUser', () => {
   });
 
   it('Calls next when an error is encountered', (done) => {
-    userModel = function UserModel() {
+    function UserModel() {
       return {
         save: () => Promise.reject('Something failed'),
       };
     };
-    userController = new UserController(userModel);
+    userController = new UserController(new UserModel(), middleware);
     userController.createUser(request, response, next)
       .then(() => {
         assert(next.called);

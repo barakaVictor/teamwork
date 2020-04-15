@@ -1,4 +1,4 @@
-const BaseModel = require('./base');
+const BaseModel = require('./app/base');
 
 class ArticleComment extends BaseModel {
   async save(obj) {

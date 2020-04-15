@@ -1,8 +1,8 @@
 const uploader = require('../utils/uploader');
 
 class UploadController {
-  constructor(Model) {
-    this.model = new Model();
+  constructor(model) {
+    this.model = model;
     this.upload = this.upload.bind(this);
     this.delete = this.delete.bind(this);
     this.read = this.read.bind(this)

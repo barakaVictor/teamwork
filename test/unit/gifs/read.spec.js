@@ -33,7 +33,7 @@ describe('GifController.read', () => {
         },
       };
     }
-    const gifcontroller = new GifController(GifModel);
+    const gifcontroller = new GifController(new GifModel());
 
     gifcontroller.read(request, response, next)
       .then((resp) => {
@@ -60,7 +60,7 @@ describe('GifController.read', () => {
         find: () => Promise.resolve(null),
       };
     }
-    const gifcontroller = new GifController(GifModel);
+    const gifcontroller = new GifController(new GifModel());
 
     gifcontroller.read(request, response, next)
       .then((resp) => {
@@ -76,7 +76,7 @@ describe('GifController.read', () => {
         find: () => Promise.reject(null),
       };
     }
-    const gifcontroller = new GifController(GifModel);
+    const gifcontroller = new GifController(new GifModel());
 
     gifcontroller.read(request, response, next)
       .then(() => {

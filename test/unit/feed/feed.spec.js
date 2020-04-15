@@ -42,7 +42,7 @@ describe('feed', () => {
         join: () => Promise.resolve(dummydata),
       };
     }
-    const feedsController = new FeedController(FeedModel);
+    const feedsController = new FeedController(new FeedModel());
     feedsController.fetchFeed(request, response, next)
       .then((resp) => {
         assert.equal(resp.status.args[0][0], 200);
@@ -55,7 +55,7 @@ describe('feed', () => {
         join: () => Promise.reject('Something aint right!!'),
       };
     }
-    const feedsController = new FeedController(FeedModel);
+    const feedsController = new FeedController(new FeedModel());
 
     feedsController.fetchFeed(request, response, next)
       .then(() => {

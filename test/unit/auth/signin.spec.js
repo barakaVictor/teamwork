@@ -4,7 +4,7 @@ const sinon = require('sinon');
 
 const { mockRequest, mockResponse, mockNext } = require('../../testutils/httpmocks');
 
-const authUtils = require('../../../src/utils/auth');
+const authUtils = require('../../../src/utils/auth')();
 
 const UserController = require('../../../src/controllers/usercontroller');
 
@@ -31,7 +31,7 @@ describe('UserController.signin', () => {
         },
       };
     };
-    userController = new UserController(userModel);
+    userController = new UserController(new userModel, authUtils);
     authUtils.hashpassword('test', 10)
       .then((hash) => {
         mockdb.push({

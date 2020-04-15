@@ -28,7 +28,7 @@ describe('ArticlesController.create', () => {
         },
       };
     }
-    const articlesController = new ArticlesController(ArticlesModel);
+    const articlesController = new ArticlesController(new ArticlesModel());
 
     articlesController.create(request, response, next)
       .then((resp) => {
@@ -44,7 +44,7 @@ describe('ArticlesController.create', () => {
         save: () => Promise.reject('Something aint right!!'),
       };
     }
-    const articlesController = new ArticlesController(ArticlesModel);
+    const articlesController = new ArticlesController(new ArticlesModel());
 
     articlesController.create(request, response, next)
       .then(() => {
