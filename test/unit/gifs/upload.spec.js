@@ -45,7 +45,7 @@ describe('GifController.upload', () => {
       };
     };
 
-    gifController = new GifController(gifModel);
+    gifController = new GifController(new gifModel());
 
     gifController.upload(request, response, next)
       .then((resp) => {
@@ -62,7 +62,7 @@ describe('GifController.upload', () => {
       };
     };
 
-    gifController = new GifController(gifModel);
+    gifController = new GifController(new gifModel());
     gifController.upload(request, response, next)
       .then(() => {
         assert(next.called);

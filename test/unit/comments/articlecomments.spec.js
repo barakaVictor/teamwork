@@ -39,7 +39,7 @@ describe('CommentsController.commentOnArticle', () => {
         }),
       };
     }
-    commentsController = new CommentsController(DummyModel);
+    commentsController = new CommentsController(new DummyModel());
     commentsController.commentOnArticle(request, response, next)
       .then((resp) => {
         assert.equal(resp.status.args[0][0], 200);
@@ -54,7 +54,7 @@ describe('CommentsController.commentOnArticle', () => {
         save: () => Promise.reject(),
       };
     }
-    commentsController = new CommentsController(DummyModel);
+    commentsController = new CommentsController(new DummyModel());
     commentsController.commentOnArticle(request, response, next)
       .then(() => {
         assert(next.called);

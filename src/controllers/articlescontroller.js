@@ -1,6 +1,8 @@
-class ArticlesController {
-  constructor(Model) {
-    this.model = new Model();
+const BaseController = require('../app/controllers/base')
+
+class ArticlesController extends BaseController{
+  constructor(model) {
+    super(model)
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
     this.delete = this.delete.bind(this);

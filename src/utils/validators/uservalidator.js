@@ -1,7 +1,6 @@
 const { body } = require('express-validator');
 
-module.exports = (UserModel) => {
-  const userModel = new UserModel();
+module.exports = (userModel) => {
   return [
     body('firstname', 'firstname field is required')
       .exists().bail()
