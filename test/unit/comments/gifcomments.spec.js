@@ -38,7 +38,7 @@ describe('CommentsController.commentOnGif', () => {
         }),
       };
     }
-    commentsController = new CommentsController(DummyModel);
+    commentsController = new CommentsController(new DummyModel());
     commentsController.commentOnGif(request, response, next)
       .then((resp) => {
         assert.equal(resp.status.args[0][0], 200);
@@ -53,7 +53,7 @@ describe('CommentsController.commentOnGif', () => {
         save: () => Promise.reject(),
       };
     }
-    commentsController = new CommentsController(DummyModel);
+    commentsController = new CommentsController(new DummyModel());
     commentsController.commentOnGif(request, response, next)
       .then(() => {
         assert(next.called);

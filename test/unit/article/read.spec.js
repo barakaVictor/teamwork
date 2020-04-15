@@ -19,7 +19,7 @@ describe('ArticlesController.read', () => {
   });
 
   it('Returns the requested article with a 200 ok response status code', (done) => {
-    articlesmodel = function ArticlesModel() {
+    function ArticlesModel() {
       return {
         find: () => {
           return Promise.resolve({
@@ -31,7 +31,7 @@ describe('ArticlesController.read', () => {
         },
       };
     }
-    const articlesController = new ArticlesController(articlesmodel);
+    const articlesController = new ArticlesController(new ArticlesModel());
 
     articlesController.read(request, response, next)
       .then((resp) => {
@@ -56,7 +56,7 @@ describe('ArticlesController.read', () => {
         find: () => Promise.resolve(null),
       };
     }
-    const articlesController = new ArticlesController(ArticlesModel);
+    const articlesController = new ArticlesController(new ArticlesModel());
 
     articlesController.read(request, response, next)
       .then((resp) => {
@@ -72,7 +72,7 @@ describe('ArticlesController.read', () => {
         find: () => Promise.reject(null),
       };
     }
-    const articlesController = new ArticlesController(ArticlesModel);
+    const articlesController = new ArticlesController(new ArticlesModel());
 
     articlesController.read(request, response, next)
       .then(() => {

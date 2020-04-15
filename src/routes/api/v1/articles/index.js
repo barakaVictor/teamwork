@@ -1,18 +1,11 @@
 const router = require('express').Router();
 
-const ArticlesModel = require('../../../../models/article');
-const ArticleCommentsModel = require('../../../../models/articlecomments');
-const ArticlesController = require('../../../../controllers/articlescontroller');
-const CommentsController = require('../../../../controllers/commentscontroller');
+module.exports = (Controller) => {
+    router.get('/:articleId', Controller.read);
+    router.post('/', Controller.create);
+    router.patch('/:articleId', Controller.update);
+    router.delete('/:articleId', Controller.delete);
+    //router.post('/:articleId/comment', commentsController.commentOnArticle);
+    return router;
 
-
-const articlesController = new ArticlesController(ArticlesModel);
-const commentsController = new CommentsController(ArticleCommentsModel);
-
-router.get('/:articleId', articlesController.read);
-router.post('/', articlesController.create);
-router.patch('/:articleId', articlesController.update);
-router.delete('/:articleId', articlesController.delete);
-router.post('/:articleId/comment', commentsController.commentOnArticle);
-
-module.exports = router;
+}

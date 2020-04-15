@@ -9,11 +9,13 @@ const initOptions = {
   }
 };
 
-const cn = process.env.DATABASE_URL;
+function init(initOptions){
+  const cn = process.env.DATABASE_URL;
+  const pgp = require('pg-promise')(initOptions);
+  const db = pgp(cn);
+  return db
+}
 
-const pgp = require('pg-promise')(initOptions);
-
-const db = pgp(cn);
 
 
-module.exports = { db };
+module.exports = { init };

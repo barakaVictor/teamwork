@@ -1,12 +1,8 @@
 const router = require('express').Router();
 
-const FeedsModel = require('../../../../models/feed');
-const FeedsController = require('../../../../controllers/feedscontroller');
+module.exports = (Controller) =>{
+    router.get('/', Controller.fetchFeed);
+    return router
+}
 
 
-const feedsController = new FeedsController(FeedsModel);
-
-
-router.get('/', feedsController.fetchFeed);
-
-module.exports = router;

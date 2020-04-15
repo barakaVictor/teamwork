@@ -1,6 +1,6 @@
 class CommentsController {
-  constructor(Model) {
-    this.model = new Model();
+  constructor(model) {
+    this.model = model;
     this.commentOnArticle = this.commentOnArticle.bind(this);
     this.commentOnGif = this.commentOnGif.bind(this);
   }

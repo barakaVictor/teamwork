@@ -29,7 +29,7 @@ describe('GifController.delete', () => {
       };
     }
 
-    gifController = new GifController(DummyModel);
+    gifController = new GifController(new DummyModel());
 
     gifController.delete(request, response, next)
       .then((resp) => {
@@ -46,7 +46,7 @@ describe('GifController.delete', () => {
       };
     }
 
-    gifController = new GifController(DummyModel);
+    gifController = new GifController(new DummyModel());
 
     gifController.delete(request, response, next)
       .then((resp) => {
@@ -65,7 +65,7 @@ describe('GifController.delete', () => {
       };
     }
 
-    gifController = new GifController(DummyModel);
+    gifController = new GifController(new DummyModel());
 
     gifController.delete(request, response, next)
       .then(() => {

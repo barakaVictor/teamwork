@@ -1,6 +1,6 @@
 class FeedController {
-  constructor(Model) {
-    this.model = new Model();
+  constructor(model) {
+    this.model = model;
     this.fetchFeed = this.fetchFeed.bind(this);
   }
 

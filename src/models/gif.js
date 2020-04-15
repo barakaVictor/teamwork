@@ -1,4 +1,4 @@
-const BaseModel = require('./base');
+const BaseModel = require('../app/models/base');
 
 class Gif extends BaseModel {
 

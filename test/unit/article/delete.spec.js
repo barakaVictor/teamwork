@@ -31,7 +31,7 @@ describe('ArticlesController.delete', () => {
         }),
       };
     }
-    articlesController = new ArticlesController(DummyModel);
+    articlesController = new ArticlesController(new DummyModel());
 
     articlesController.delete(request, response, next)
       .then((resp) => {
@@ -49,7 +49,7 @@ describe('ArticlesController.delete', () => {
       };
     }
 
-    articlesController = new ArticlesController(DummyModel);
+    articlesController = new ArticlesController(new DummyModel());
     articlesController.delete(request, response, next)
       .then((resp) => {
         assert.equal(resp.status.args[0][0], 404);
@@ -70,7 +70,7 @@ describe('ArticlesController.delete', () => {
         }),
       };
     }
-    articlesController = new ArticlesController(DummyModel);
+    articlesController = new ArticlesController(new DummyModel());
     articlesController.delete(request, response, next)
       .then(() => {
         assert(next.called);
