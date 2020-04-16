@@ -7,7 +7,7 @@ class ArticleComment extends BaseModel {
       [obj.articleid],
     ).then((article) => {
       if (!article) {
-        throw new Error('Related article does not exist yet');
+        throw 'Related article does not exist yet';
       }
       return this.db.one(
         'INSERT INTO $1:name($2:name) VALUES($2:list) RETURNING *',
@@ -18,10 +18,10 @@ class ArticleComment extends BaseModel {
           article,
         }))
         .catch((error) => {
-          throw new Error(error);
+          throw error;
         });
     }).catch((error) => {
-      throw new Error(error);
+      throw error;
     });
   }
 }

@@ -16,6 +16,4 @@ function init(initOptions){
   return db
 }
 
-
-
 module.exports = { init };

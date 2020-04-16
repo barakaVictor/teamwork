@@ -15,7 +15,7 @@ class User extends BaseModel {
     )
       .then((users) => users)
       .catch((error) => {
-        throw new Error(error);
+        throw error;
       });
   }
 
@@ -37,7 +37,7 @@ class User extends BaseModel {
     )
       .then((obj) => obj)
       .catch((error) => {
-        throw new Error(error);
+        throw error;
       });
   }
 
@@ -55,7 +55,7 @@ class User extends BaseModel {
     )
       .then((data) => data.id)
       .catch((error) => {
-        throw new Error(error);
+        throw error;
       });
   }
 }

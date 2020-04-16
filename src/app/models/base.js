@@ -42,7 +42,7 @@ class BaseModel {
         return obj
       })
       .catch((error) => {
-        throw new Error(error);
+        throw error;
       });
   }
 
@@ -53,7 +53,7 @@ class BaseModel {
     )
       .then((result) => result)
       .catch((error) => {
-        throw new Error(error);
+        throw error;
       });
   }
 
@@ -64,7 +64,7 @@ class BaseModel {
     )
       .then((obj) => obj)
       .catch((error) => {
-        throw new Error(error);
+        throw error;
       });
   }
 
@@ -75,7 +75,7 @@ class BaseModel {
     )
       .then(() => true)
       .catch((error) => {
-        throw new Error(error);
+        throw error;
       });
   }
 
@@ -86,7 +86,7 @@ class BaseModel {
     )
       .then(() => true)
       .catch((error) => {
-        throw new Error(error);
+        throw error;
       });
   }
 }

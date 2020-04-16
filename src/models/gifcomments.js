@@ -7,7 +7,7 @@ class GifComment extends BaseModel {
       [obj.gifid],
     ).then((gif) => {
       if (!gif) {
-        throw new Error('Related gif does not exist yet');
+        throw new 'Related gif does not exist yet';
       }
       return this.db.one(
         'INSERT INTO $1:name($2:name) VALUES($2:list) RETURNING *',
@@ -18,10 +18,10 @@ class GifComment extends BaseModel {
           gif,
         }))
         .catch((error) => {
-          throw new Error(error);
+          throw error;
         });
     }).catch((error) => {
-      throw new Error(error);
+      throw error;
     });
   }
 }
