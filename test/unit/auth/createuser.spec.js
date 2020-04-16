@@ -17,7 +17,7 @@ describe('UserController.createUser', () => {
     next = mockNext();
     userModel = function UserModel() {
       return {
-        save: async (data) => Promise.resolve(data),
+        save: async (data) => Promise.resolve(data.id),
       };
     };
     userController = new UserController(new userModel(), middleware);
@@ -42,6 +42,12 @@ describe('UserController.createUser', () => {
     userController.createUser(request, response, mockNext)
       .then((resp) => {
         assert.equal(resp.status.args[0][0], 201);
+        assert('data' in resp.json.args[0][0])
+        assert.deepStrictEqual(resp.json.args[0][0].data, 
+          {
+            message: 'User account successfully created',
+            userId: 1
+          })
         done();
       })
       .catch((error) => done(error));

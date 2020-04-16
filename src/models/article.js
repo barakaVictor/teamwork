@@ -9,7 +9,7 @@ class Article extends BaseModel {
     )
       .then((obj) => obj)
       .catch((error) => {
-        throw new Error(error);
+        throw error;
       });
   }
 

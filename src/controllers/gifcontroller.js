@@ -45,7 +45,7 @@ class UploadController {
               imageUrl: data.imageurl,
             },
           })).catch((error) => {
-            throw new Error(error);
+            throw error;
           });
       }).catch((error) => next(error));
   }
@@ -67,7 +67,7 @@ class UploadController {
               message: 'gif post deleted successfully',
             },
           })).catch((error) => {
-            throw new Error(error);
+            throw error;
           });
       }).catch((error) => next(error));
   }

@@ -56,7 +56,7 @@ class ArticlesController extends BaseController{
               article: savedArticle.article,
             },
           })).catch((error) => {
-            throw new Error(error);
+            throw error;
           });
       }).catch((error) => next(error));
   }
@@ -78,7 +78,7 @@ class ArticlesController extends BaseController{
             },
           }))
           .catch((error) => {
-            throw new Error(error);
+            throw error;
           });
       }).catch((error) => next(error));
   }

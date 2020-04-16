@@ -17,12 +17,11 @@ class UserController extends BaseController {
               status: 'success',
               data: {
                 message: 'User account successfully created',
-                token: 'random',
                 userId,
               },
             }))
           .catch((error) => {
-            throw new Error(error);
+            throw error;
           });
       }).catch((error) => next(error));
   }
@@ -53,10 +52,10 @@ class UserController extends BaseController {
                   userId: user.id,
                 },
               })).catch((error) => {
-                throw new Error(error);
+                throw error;
               });
           }).catch((error) => {
-            throw new Error(error);
+            throw error;
           });
       }).catch((error) => next(error));
   }
