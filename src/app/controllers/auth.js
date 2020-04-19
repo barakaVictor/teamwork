@@ -1,13 +1,15 @@
-const BaseController = require('../app/controllers/base')
-class UserController extends BaseController {
+const authutils = require('../utils/auth')
+
+const BaseController = require('./base')
+class AuthController extends BaseController {
   constructor(model, middleware) {
     super(model, middleware)
-    this.createUser = this.createUser.bind(this);
+    this.register = this.register.bind(this);
     this.signin = this.signin.bind(this);
   }
 
-  async createUser(request, response, next) {
-    return this.middleware.hashpassword(request.body.password, 10)
+  async register(request, response, next) {
+    return authutils.hashpassword(request.body.password, 10)
       .then((hash) => {
         request.body.password = hash;
         return this.model.save(request.body)
@@ -36,7 +38,7 @@ class UserController extends BaseController {
             error: 'User not found',
           });
         }
-        return this.middleware.authenticate(password, user.password)
+        return authutils.authenticate(password, user.password)
           .then((valid) => {
             if (!valid) {
               return response.status(401).json({
@@ -44,7 +46,7 @@ class UserController extends BaseController {
                 error: 'Invalid credentials provided',
               });
             }
-            return this.middleware.generateAuthToken(user)
+            return authutils.generateAuthToken(user)
               .then((token) => response.status(200).json({
                 status: 'success',
                 data: {
@@ -61,4 +63,4 @@ class UserController extends BaseController {
   }
 }
 
-module.exports = UserController;
+module.exports = AuthController;

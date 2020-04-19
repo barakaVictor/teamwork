@@ -32,7 +32,7 @@ describe('ArticlesController.create', () => {
 
     articlesController.create(request, response, next)
       .then((resp) => {
-        assert.equal(resp.status.args[0][0], 200);
+        assert.equal(resp.status.args[0][0], 201);
         done();
       })
       .catch((error) => done(error));

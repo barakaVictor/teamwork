@@ -2,7 +2,7 @@ const assert = require('assert');
 
 const { mockRequest, mockResponse, mockNext } = require('../../testutils/httpmocks');
 
-const UserController = require('../../../src/controllers/usercontroller');
+const UserController = require('../../../src/app/controllers/auth');
 
 const middleware = require('../../../src/utils/auth')()
 
@@ -39,7 +39,7 @@ describe('UserController.createUser', () => {
       ,
     });
 
-    userController.createUser(request, response, mockNext)
+    userController.register(request, response, mockNext)
       .then((resp) => {
         assert.equal(resp.status.args[0][0], 201);
         assert('data' in resp.json.args[0][0])
@@ -60,7 +60,7 @@ describe('UserController.createUser', () => {
       };
     };
     userController = new UserController(new UserModel(), middleware);
-    userController.createUser(request, response, next)
+    userController.register(request, response, next)
       .then(() => {
         assert(next.called);
         done();

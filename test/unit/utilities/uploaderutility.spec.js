@@ -33,7 +33,7 @@ describe('Upload Utility', () => {
   it('Returns data about an image on successful upload', (done) => {
     fsOps = sinon.stub(fs, 'unlinkSync')
     fileSystemUpload = sinon.stub(multer, 'fileSystemUpload').yields()
-    cloudinaryUpload = sinon.stub(cloudinary, 'cloudinaryUpload').yields(null,{
+    cloudinaryUpload = sinon.stub(cloudinary, 'upload').yields(null,{
       gifId: 6,
       message: 'GIF image successfully posted',
       createdOn: '2020-04-12T21:47:16.000Z',
@@ -56,14 +56,14 @@ describe('Upload Utility', () => {
   it('Halts execution and throws an error if local upload fails', (done) => {
     fsOps = sinon.stub(fs, 'unlinkSync')
     fileSystemUpload = sinon.stub(multer, 'fileSystemUpload').yields(new Error("An error was encountered"))
-    cloudinaryUpload = sinon.stub(cloudinary, 'cloudinaryUpload').yields(null, {});
+    cloudinaryUpload = sinon.stub(cloudinary, 'upload').yields(null, {});
     assert.rejects(uploader.upload(request, response));
       done();
     });
   it('Halts execution and throws an error if cloud upload fails', (done) => {
     fsOps = sinon.stub(fs, 'unlinkSync')
     fileSystemUpload = sinon.stub(multer, 'fileSystemUpload').yields()
-    cloudinaryUpload = sinon.stub(cloudinary, 'cloudinaryUpload').yields(new Error("An error was encountered"));
+    cloudinaryUpload = sinon.stub(cloudinary, 'upload').yields(new Error("An error was encountered"));
     assert.rejects(uploader.upload(request, response));
       done();
     });

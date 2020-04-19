@@ -1,8 +1,8 @@
-const uploader = require('../utils/uploader');
 
-class UploadController {
-  constructor(model) {
-    this.model = model;
+const BaseController = require("../app/controllers/base")
+class UploadController extends BaseController {
+  constructor(model, dependency) {
+    super(model, dependency)
     this.upload = this.upload.bind(this);
     this.delete = this.delete.bind(this);
     this.read = this.read.bind(this)
@@ -24,7 +24,7 @@ class UploadController {
   }
 
   async upload(request, response, next) {
-    return uploader.upload(request, response)
+    return this.middleware.upload(request, response)
       .then((result) => {
         const image = {
           title: result.original_filename,
@@ -33,9 +33,8 @@ class UploadController {
           imageurl: result.secure_url,
           created_on: result.created_at,
         };
-
         return this.model.save(image)
-          .then((data) => response.status(200).json({
+          .then((data) => response.status(201).json({
             status: 'success',
             data: {
               gifId: data.id,

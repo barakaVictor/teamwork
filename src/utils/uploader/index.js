@@ -9,7 +9,7 @@ function upload(request, response) {
         reject(error);
       }
       const filePath = request.file.path;
-      cloudinary.cloudinaryUpload(filePath, (cloudinaryerror, result) => {
+      cloudinary.upload(filePath, (cloudinaryerror, result) => {
         if (cloudinaryerror) {
           reject(cloudinaryerror);
         }
