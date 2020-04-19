@@ -45,11 +45,25 @@ describe('GifController.upload', () => {
       };
     };
 
-    gifController = new GifController(new gifModel());
+    Middleware = function Middleware() {
+      return {
+        upload: (data) => {
+          data.id = 1;
+          return Promise.resolve({
+            original_filename: "Test.gif",
+            public_id: "sytdzjr171xal1xzbkha",
+            bytes: 1244022,
+            secure_url: "https://res.cloudinary.com/baraka/image/upload/v1587203722/sytdzjr171xal1xzbkha.gif",
+            created_at: "2020-04-18T09:55:22.000Z"});
+        },
+      };
+    };    
+
+    gifController = new GifController(new gifModel(), new Middleware());
 
     gifController.upload(request, response, next)
       .then((resp) => {
-        assert.equal(resp.status.args[0][0], 200);
+        assert.equal(resp.status.args[0][0], 201);
         done();
       })
       .catch((error) => done(error));
@@ -62,7 +76,15 @@ describe('GifController.upload', () => {
       };
     };
 
-    gifController = new GifController(new gifModel());
+    Middleware = function Middleware() {
+      return {
+        upload: (data) => {
+          data.id = 1;
+          return Promise.reject('Something aint right !!');
+        },
+      };
+    }
+    gifController = new GifController(new gifModel(), new Middleware());
     gifController.upload(request, response, next)
       .then(() => {
         assert(next.called);

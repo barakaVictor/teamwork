@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
-module.exports = (middleware, Controller) => {
-    router.post('/create-user', middleware, Controller.createUser);
-    router.post('/signin', Controller.signin);
+module.exports = (options) => {
+    router.post('/create-user', options.middleware, options.controller.register);
+    router.post('/signin', options.controller.signin);
     return router;
 }

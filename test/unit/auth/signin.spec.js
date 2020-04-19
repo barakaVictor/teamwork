@@ -4,9 +4,9 @@ const sinon = require('sinon');
 
 const { mockRequest, mockResponse, mockNext } = require('../../testutils/httpmocks');
 
-const authUtils = require('../../../src/utils/auth')();
+const authutils = require('../../../src/app/utils/auth')
 
-const UserController = require('../../../src/controllers/usercontroller');
+const UserController = require('../../../src/app/controllers/auth');
 
 describe('UserController.signin', () => {
   let userController;
@@ -31,8 +31,7 @@ describe('UserController.signin', () => {
         },
       };
     };
-    userController = new UserController(new userModel, authUtils);
-    authUtils.hashpassword('test', 10)
+    authutils.hashpassword('test', 10)
       .then((hash) => {
         mockdb.push({
           id: 1,
@@ -48,7 +47,6 @@ describe('UserController.signin', () => {
         done();
       }).catch((error) => done(error));
   });
-
   it('Returns 401 unathorized when provided with invalid credentials', (done) => {
     request = mockRequest({
       body: {
@@ -56,6 +54,8 @@ describe('UserController.signin', () => {
         password: 'invalid',
       },
     });
+
+    userController = new UserController(new userModel());
 
     userController.signin(request, response, next)
       .then((resp) => {
@@ -72,6 +72,7 @@ describe('UserController.signin', () => {
       },
     });
 
+    userController = new UserController(new userModel());
     userController.signin(request, response, next)
       .then((resp) => {
         assert.equal(resp.status.args[0][0], 404);
@@ -87,6 +88,8 @@ describe('UserController.signin', () => {
       },
     });
 
+    userController = new UserController(new userModel());
+
     userController.signin(request, response, next)
       .then((resp) => {
         assert.equal(resp.status.args[0][0], 200);
@@ -95,12 +98,17 @@ describe('UserController.signin', () => {
   });
 
   it('Calls next atleast once when an error arises', (done) => {
-    sinon.stub(authUtils, 'generateAuthToken').rejects();
+    let tokengenerator = sinon.stub(authutils, 'generateAuthToken').rejects("something went wrong");
+    userController = new UserController(new userModel());
     userController.signin(request, response, next)
       .then(() => {
         assert(next.called);
         done();
       })
-      .catch((error) => done(error));
+      .catch((error) => done(error))
+      .finally(()=>{
+        tokengenerator.restore()
+        //done()
+      })
   });
 });

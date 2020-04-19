@@ -4,10 +4,10 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const {app} = require('./setup.spec')
 
-describe('GET /api/v1/', function() {
-    it("Returns hello world with 200 ok response status code on success", (done) => {
+describe('GET /api/v1/feed', function() {
+    it("Returns hello world with 200 ok with a list of posts or gifs", (done) => {
       chai.request(app)
-      .get('/api/v1/')
+      .get('/api/v1/feed')
       .send()
       .end(function (err, res) {
         expect(err).to.be.null;
