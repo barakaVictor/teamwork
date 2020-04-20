@@ -4,7 +4,7 @@ const { mockRequest, mockResponse, mockNext } = require('../../testutils/httpmoc
 
 const UserController = require('../../../src/app/controllers/auth');
 
-const middleware = require('../../../src/utils/auth')()
+const middleware = require('../../../src/app/utils/auth')
 
 describe('UserController.createUser', () => {
   let request;
