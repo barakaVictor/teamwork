@@ -108,7 +108,6 @@ describe('UserController.signin', () => {
       .catch((error) => done(error))
       .finally(()=>{
         tokengenerator.restore()
-        //done()
       })
   });
 });
