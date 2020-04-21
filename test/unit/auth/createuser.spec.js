@@ -2,9 +2,9 @@ const assert = require('assert');
 
 const { mockRequest, mockResponse, mockNext } = require('../../testutils/httpmocks');
 
-const UserController = require('../../../src/controllers/usercontroller');
+const UserController = require('../../../src/app/controllers/auth');
 
-const middleware = require('../../../src/utils/auth')()
+const middleware = require('../../../src/app/utils/auth')
 
 describe('UserController.createUser', () => {
   let request;
@@ -17,7 +17,7 @@ describe('UserController.createUser', () => {
     next = mockNext();
     userModel = function UserModel() {
       return {
-        save: async (data) => Promise.resolve(data),
+        save: async (data) => Promise.resolve(data.id),
       };
     };
     userController = new UserController(new userModel(), middleware);
@@ -39,9 +39,15 @@ describe('UserController.createUser', () => {
       ,
     });
 
-    userController.createUser(request, response, mockNext)
+    userController.register(request, response, mockNext)
       .then((resp) => {
         assert.equal(resp.status.args[0][0], 201);
+        assert('data' in resp.json.args[0][0])
+        assert.deepStrictEqual(resp.json.args[0][0].data, 
+          {
+            message: 'User account successfully created',
+            userId: 1
+          })
         done();
       })
       .catch((error) => done(error));
@@ -54,7 +60,7 @@ describe('UserController.createUser', () => {
       };
     };
     userController = new UserController(new UserModel(), middleware);
-    userController.createUser(request, response, next)
+    userController.register(request, response, next)
       .then(() => {
         assert(next.called);
         done();

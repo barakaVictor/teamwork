@@ -1,10 +1,30 @@
 const router = require('express').Router();
 
-module.exports = (Controller) => {
-    router.get('/:articleId', Controller.read);
-    router.post('/', Controller.create);
-    router.patch('/:articleId', Controller.update);
-    router.delete('/:articleId', Controller.delete);
+module.exports = (options) => {
+    let middleware = {...options.middleware}
+    let controller = {...options.controller}
+    router.get(
+        '/:articleId',
+        options.controller.read
+    );
+
+    router.post(
+        '/',
+        middleware.auth.authorize, 
+        controller.create
+     );
+
+    router.patch(
+        '/:articleId', 
+        middleware.auth.authorize, 
+        controller.update
+        );
+
+    router.delete(
+        '/:articleId',  
+        middleware.auth.authorize, 
+        controller.delete
+        );
     //router.post('/:articleId/comment', commentsController.commentOnArticle);
     return router;
 

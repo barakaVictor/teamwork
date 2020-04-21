@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const fileSystemUpload = multer({ storage }).single('gif');
+const upload = multer({ storage }).single('gif');
 module.exports = {
-  fileSystemUpload,
+  upload,
 };

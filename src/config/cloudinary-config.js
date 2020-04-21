@@ -5,7 +5,7 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
-const cloudinaryUpload = cloudinary.uploader.upload;
+const { upload } = cloudinary.uploader;
 module.exports = {
-  cloudinaryUpload,
+  upload,
 };

@@ -1,17 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('../middleware/cors');
-const dotenv = require('dotenv');
+const cors = require('./middleware/cors');
 
-
-function initApp(settings_path){
-    dotenv.config({path: settings_path});
+function initApp(){
     const app = express();
     app.use(cors);
     app.use(bodyParser.json());
     return app
 }
-
-
 
 module.exports = {initApp};

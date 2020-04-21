@@ -26,7 +26,7 @@ class ArticlesController extends BaseController{
 
   async create(request, response, next) {
     return this.model.save(request.body)
-      .then((article) => response.status(200).json({
+      .then((article) => response.status(201).json({
         status: 'success',
         data: {
           message: 'Article successfully posted',
@@ -46,8 +46,8 @@ class ArticlesController extends BaseController{
             error: 'The requested was not found!!',
           });
         }
-        const newArticle = request.body;
-        return this.model.update(newArticle, { id: article.id })
+        const updatedArticle = Object.assign(article, request.body);
+        return this.model.update(updatedArticle, { id: updatedArticle.id })
           .then((savedArticle) => response.status(200).json({
             status: 'Success',
             data: {
@@ -56,7 +56,7 @@ class ArticlesController extends BaseController{
               article: savedArticle.article,
             },
           })).catch((error) => {
-            throw new Error(error);
+            throw error;
           });
       }).catch((error) => next(error));
   }
@@ -78,7 +78,7 @@ class ArticlesController extends BaseController{
             },
           }))
           .catch((error) => {
-            throw new Error(error);
+            throw error;
           });
       }).catch((error) => next(error));
   }

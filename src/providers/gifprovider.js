@@ -5,5 +5,12 @@ const GifRoutes = require('../routes/api/v1/gifs')
 module.exports = (c) => {
     c.service('GifModel', (c) => new GifModel(c.db, null))
     c.service('GifController', (c) => new GifController(c.GifModel))
-    c.service('GifRoutes', (c) => GifRoutes(c.GifController))
+    c.service('GifRoutes', (c) => GifRoutes({
+        middleware:{
+            auth: c.AuthMiddleware,
+            fileupload: c.FileUploadMiddleware,
+            cloudinaryUpload: c.CloudinaryUploader
+        },
+        controller: c.GifController
+    }))
 }
