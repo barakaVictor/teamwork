@@ -1,10 +1,10 @@
-const chai = require('chai')
-const expect = chai.expect
+const chai = require('chai');
+const expect = chai.expect;
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
-const {app, container} = require('./setup.spec')
-const gifsModel = container.GifModel
-const userModel = container.UserModel
+const {app, container} = require('./setup.spec');
+const gifsModel = container.GifModel;
+const userModel = container.UserModel;
 
 
 describe("GET /api/v1/gifs/<:gifId>", function(){

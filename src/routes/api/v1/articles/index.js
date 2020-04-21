@@ -10,19 +10,19 @@ module.exports = (options) => {
 
     router.post(
         '/',
-        middleware.auth.authorize(), 
+        middleware.auth.authorize, 
         controller.create
      );
 
     router.patch(
         '/:articleId', 
-        middleware.auth.authorize(), 
+        middleware.auth.authorize, 
         controller.update
         );
 
     router.delete(
         '/:articleId',  
-        middleware.auth.authorize(), 
+        middleware.auth.authorize, 
         controller.delete
         );
     //router.post('/:articleId/comment', commentsController.commentOnArticle);

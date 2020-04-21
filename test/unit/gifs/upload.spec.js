@@ -1,65 +1,40 @@
 const assert = require('assert');
 
-const sinon = require('sinon');
-
 const { mockRequest, mockResponse, mockNext } = require('../../testutils/httpmocks');
 
-const uploader = require('../../../src/utils/uploader');
 
 const GifController = require('../../../src/controllers/gifcontroller');
 
 describe('GifController.upload', () => {
-  let gifModel;
   let gifController;
   let request;
   let response;
   let next;
-  let upload;
   beforeEach(() => {
     response = mockResponse();
     request = mockRequest({
-      file: {
-        path: '',
-      },
+      cloudinaryResponse: {
+          original_filename: 'test',
+          public_id: 'someid',
+          bytes: 'somebytes',
+          secure_url: 'https://someurl/',
+          created_at: new Date(),
+        },
     });
     next = mockNext();
-    upload = sinon.stub(uploader, 'upload').resolves({
-      original_filename: 'test',
-      public_id: 'someid',
-      bytes: 'somebytes',
-      secure_url: 'https://someurl/',
-      created_at: new Date(),
-    });
   });
 
-  afterEach(() => {
-    upload.restore();
-  });
   it('Returns 200 Ok on successful gif upload', (done) => {
-    gifModel = function Model() {
+    function gifModel() {
       return {
         save: (data) => {
           data.id = 1;
           return Promise.resolve(data);
         },
       };
-    };
+    }; 
 
-    Middleware = function Middleware() {
-      return {
-        upload: (data) => {
-          data.id = 1;
-          return Promise.resolve({
-            original_filename: "Test.gif",
-            public_id: "sytdzjr171xal1xzbkha",
-            bytes: 1244022,
-            secure_url: "https://res.cloudinary.com/baraka/image/upload/v1587203722/sytdzjr171xal1xzbkha.gif",
-            created_at: "2020-04-18T09:55:22.000Z"});
-        },
-      };
-    };    
-
-    gifController = new GifController(new gifModel(), new Middleware());
+    gifController = new GifController(new gifModel());
 
     gifController.upload(request, response, next)
       .then((resp) => {
@@ -70,21 +45,12 @@ describe('GifController.upload', () => {
   });
 
   it('Calls next when any error is encountered', (done) => {
-    gifModel = function Model() {
+    function gifModel() {
       return {
         save: () => Promise.reject('Something aint right !!'),
       };
     };
-
-    Middleware = function Middleware() {
-      return {
-        upload: (data) => {
-          data.id = 1;
-          return Promise.reject('Something aint right !!');
-        },
-      };
-    }
-    gifController = new GifController(new gifModel(), new Middleware());
+    gifController = new GifController(new gifModel());
     gifController.upload(request, response, next)
       .then(() => {
         assert(next.called);

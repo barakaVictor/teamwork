@@ -3,16 +3,27 @@ const container = createContainer({config_path: __dirname+"/../../.env.test.cfg"
 
 /**Mocking multer and cloudinary upload handlers as implemented in the upload utility */
 container.service("FileUploadMiddleware", container => {
-    return  {
-        upload: async (request, response) =>{
-            return {
-                original_filename: "Test.gif",
-                public_id: "sytdzjr171xal1xzbkha",
-                bytes: 1244022,
-                secure_url: "https://res.cloudinary.com/baraka/image/upload/v1587203722/sytdzjr171xal1xzbkha.gif",
-                created_at: "2020-04-18T09:55:22.000Z"
+    return (request, response, next) =>{
+        const dummyFile = {
+            file: {
+                path: "/some/random/path"
             }
         }
+        request = Object.assign(request, dummyFile);
+        return next()
+    }
+})
+
+container.service("CloudinaryUploader", container => {
+    return (request, response, next) =>{
+        request.cloudinaryResponse = {
+            original_filename:"test.gif",
+            public_id:"dghghsjkdkls",
+            bytes: 36478839,
+            secure_url: "https://some/secure/url/test.gif",
+            created_at: new Date()
+        };
+        return next()
     }
 })
 const db = container.db
