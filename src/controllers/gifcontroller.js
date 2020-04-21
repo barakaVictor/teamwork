@@ -1,8 +1,8 @@
-
+const cloudinaryUploader = require("../config/cloudinary-config")
 const BaseController = require("../app/controllers/base")
 class UploadController extends BaseController {
-  constructor(model, dependency) {
-    super(model, dependency)
+  constructor(model) {
+    super(model)
     this.upload = this.upload.bind(this);
     this.delete = this.delete.bind(this);
     this.read = this.read.bind(this)
@@ -24,29 +24,26 @@ class UploadController extends BaseController {
   }
 
   async upload(request, response, next) {
-    return this.middleware.upload(request, response)
-      .then((result) => {
-        const image = {
-          title: result.original_filename,
-          public_id: result.public_id,
-          size: result.bytes,
-          imageurl: result.secure_url,
-          created_on: result.created_at,
-        };
-        return this.model.save(image)
-          .then((data) => response.status(201).json({
-            status: 'success',
-            data: {
-              gifId: data.id,
-              message: 'GIF image successfully posted',
-              createdOn: data.created_on,
-              title: data.title,
-              imageUrl: data.imageurl,
-            },
-          })).catch((error) => {
-            throw error;
-          });
-      }).catch((error) => next(error));
+      const image = {
+        title: request.cloudinaryResponse.original_filename,
+        public_id: request.cloudinaryResponse.public_id,
+        size: request.cloudinaryResponse.bytes,
+        imageurl: request.cloudinaryResponse.secure_url,
+        created_on: request.cloudinaryResponse.created_at,
+      };
+      return this.model.save(image)
+        .then((data) => response.status(201).json({
+          status: 'success',
+          data: {
+            gifId: data.id,
+            message: 'GIF image successfully posted',
+            createdOn: data.created_on,
+            title: data.title,
+            imageUrl: data.imageurl,
+          },
+        })).catch((error) => {
+          next(error);
+        });
   }
 
   async delete(request, response, next) {
