@@ -52,6 +52,7 @@ class AuthController extends BaseController {
                 data: {
                   token,
                   userId: user.id,
+                  isAdmin: user.isadmin
                 },
               })).catch((error) => {
                 throw error;
