@@ -11,6 +11,7 @@ module.exports = (options) => {
     router.post(
         '/',
         middleware.auth.authorize, 
+        middleware.validator,
         controller.create
      );
 

@@ -15,7 +15,7 @@ const defaultinitOptions = {
     // console.log(data);
   },
   query(e) {
-    // console.log('QUERY:', e.query);
+    //console.log('QUERY:', e.query);
   },
   extend(obj, dc){
     obj.createTables = async () => {

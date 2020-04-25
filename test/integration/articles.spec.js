@@ -31,7 +31,7 @@ describe("GET /api/v1/articles/<:articleId>", function(){
 })
 
 describe("POST /api/v1/articles", function(){
-    before(function(done){
+    beforeEach(function(done){
       chai.request(app)
       .post("/api/v1/auth/create-user")
       .send({
@@ -76,7 +76,32 @@ describe("POST /api/v1/articles", function(){
         })
     })
 
-    after(async function(){
+    it("Returns 422 uprocessable entity when input validation fails", function(done){
+        chai.request(app)
+        .post("/api/v1/auth/signin")
+        .send({
+            "email": "testadmin4@example.com",
+            "password": "random",
+        })
+        .end(function(error, response){
+            expect(error).to.be.null
+            expect(response).to.have.status(200)
+            chai.request(app)
+            .post("/api/v1/articles")
+            .set("Authorization", "Bearer "+ response.body.data.token)
+            .send({
+                title: "",
+                article: ""  
+            })
+            .end(function(error, response){
+                expect(error).to.be.null
+                expect(response).to.have.status(422)
+                done();
+            })
+        })
+    })
+
+    afterEach(async function(){
         await userModel.truncate()
         await articlesModel.truncate()
     })
