@@ -1,5 +1,6 @@
 # teamwork
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/79a7799fea73410198cd98184139f79d)](https://app.codacy.com/manual/barakaVictor/teamwork?utm_source=github.com&utm_medium=referral&utm_content=barakaVictor/teamwork&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/barakaVictor/teamwork.svg?branch=master)](https://travis-ci.org/barakaVictor/teamwork)
 [![codecov](https://codecov.io/gh/barakaVictor/teamwork/branch/master/graph/badge.svg)](https://codecov.io/gh/barakaVictor/teamwork)
 
